@@ -7,7 +7,7 @@
     <title>Chengbiao Deng | Agentic AI & Enterprise AI Expert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -37,10 +37,64 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
             line-height: 1.7;
             background: var(--white);
+        }
+
+        body.zh {
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-light);
+            padding: 0.3rem;
+            border-radius: 20px;
+            margin-left: 1.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            background: transparent;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--primary);
+        }
+
+        /* Hide elements based on language */
+        [data-lang="zh"] {
+            display: none;
+        }
+
+        body.zh [data-lang="en"] {
+            display: none;
+        }
+
+        body.zh [data-lang="zh"] {
+            display: block;
+        }
+
+        body.zh span[data-lang="zh"],
+        body.zh a[data-lang="zh"] {
+            display: inline;
         }
 
         /* Navigation */
@@ -70,6 +124,11 @@
             font-weight: 700;
             color: var(--primary);
             text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
         }
 
         nav ul {
@@ -143,6 +202,11 @@
             line-height: 1.2;
         }
 
+        body.zh .hero-content h1 {
+            font-family: 'Noto Sans SC', serif;
+            font-weight: 700;
+        }
+
         .hero-content .tagline {
             font-size: 1.5rem;
             color: rgba(255,255,255,0.9);
@@ -214,6 +278,11 @@
             color: var(--primary);
             text-align: center;
             margin-bottom: 1rem;
+        }
+
+        body.zh .section-title {
+            font-family: 'Noto Sans SC', serif;
+            font-weight: 700;
         }
 
         .section-subtitle {
@@ -531,6 +600,11 @@
             margin-bottom: 0.25rem;
         }
 
+        .education-card .location {
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
         .education-card .date {
             color: var(--text-light);
             font-size: 0.9rem;
@@ -668,6 +742,10 @@
                 display: flex;
             }
 
+            .lang-toggle {
+                margin-left: 1rem;
+            }
+
             .hero-content h1 {
                 font-size: 2.5rem;
             }
@@ -710,19 +788,25 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">CD</a>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-right">
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#about" data-lang="en">About</a><a href="#about" data-lang="zh">关于</a></li>
+                    <li><a href="#highlights" data-lang="en">Expertise</a><a href="#highlights" data-lang="zh">专长</a></li>
+                    <li><a href="#experience" data-lang="en">Experience</a><a href="#experience" data-lang="zh">经历</a></li>
+                    <li><a href="#skills" data-lang="en">Skills</a><a href="#skills" data-lang="zh">技能</a></li>
+                    <li><a href="#education" data-lang="en">Education</a><a href="#education" data-lang="zh">教育</a></li>
+                    <li><a href="#contact" data-lang="en">Contact</a><a href="#contact" data-lang="zh">联系</a></li>
+                </ul>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('zh')">中文</button>
+                </div>
             </div>
-            <ul id="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#highlights">Expertise</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -730,12 +814,17 @@
     <section class="hero" id="about">
         <div class="container">
             <div class="hero-content">
-                <h1>Chengbiao Deng</h1>
-                <p class="tagline">Agentic AI & Enterprise AI Expert</p>
-                <p>Building the future of enterprise AI with multi-agent systems, evolutionary code generation, and production-ready AI solutions. Proven track record of delivering global impact at Fortune 500 companies.</p>
+                <h1 data-lang="en">Chengbiao Deng</h1>
+                <h1 data-lang="zh">邓成标</h1>
+                <p class="tagline" data-lang="en">Agentic AI & Enterprise AI Expert</p>
+                <p class="tagline" data-lang="zh">智能体AI与企业AI专家</p>
+                <p data-lang="en">Building the future of enterprise AI with multi-agent systems, evolutionary code generation, and production-ready AI solutions. Proven track record of delivering global impact at Fortune 500 companies.</p>
+                <p data-lang="zh">致力于通过多智能体系统、进化式代码生成和生产级AI解决方案构建企业AI的未来。在世界500强企业中拥有全球影响力的成功案例。</p>
                 <div>
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#experience" class="btn btn-outline">View Experience</a>
+                    <a href="#contact" class="btn btn-primary" data-lang="en">Get In Touch</a>
+                    <a href="#contact" class="btn btn-primary" data-lang="zh">联系我</a>
+                    <a href="#experience" class="btn btn-outline" data-lang="en">View Experience</a>
+                    <a href="#experience" class="btn btn-outline" data-lang="zh">查看经历</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -747,23 +836,31 @@
     <!-- Highlights Section -->
     <section class="highlights" id="highlights">
         <div class="container">
-            <h2 class="section-title">Core Expertise</h2>
-            <p class="section-subtitle">Specializing in cutting-edge AI technologies that transform enterprise operations</p>
+            <h2 class="section-title" data-lang="en">Core Expertise</h2>
+            <h2 class="section-title" data-lang="zh">核心专长</h2>
+            <p class="section-subtitle" data-lang="en">Specializing in cutting-edge AI technologies that transform enterprise operations</p>
+            <p class="section-subtitle" data-lang="zh">专注于变革企业运营的前沿AI技术</p>
             <div class="highlight-grid">
                 <div class="highlight-card">
                     <i class="fas fa-robot"></i>
-                    <h3>Multi-Agent AI Systems</h3>
-                    <p>Architecting sophisticated multi-agent systems for enterprise applications. Project highlighted at <strong>Global Bosch AI Day</strong>, demonstrating production-ready agentic solutions for customer service, SQL generation, and automated code generation.</p>
+                    <h3 data-lang="en">Multi-Agent AI Systems</h3>
+                    <h3 data-lang="zh">多智能体AI系统</h3>
+                    <p data-lang="en">Architecting sophisticated multi-agent systems for enterprise applications. Project highlighted at <strong>Global Bosch AI Day</strong>, demonstrating production-ready agentic solutions for customer service, SQL generation, and automated code generation.</p>
+                    <p data-lang="zh">为企业应用构建复杂的多智能体系统。项目在<strong>博世全球AI日</strong>上展示，展现了面向客户服务、SQL生成和自动化代码生成的生产级智能体解决方案。</p>
                 </div>
                 <div class="highlight-card">
                     <i class="fas fa-dna"></i>
-                    <h3>Evolutionary Code Generation</h3>
-                    <p>Pioneering evolutionary code generation systems similar to <strong>DeepMind's AlphaEvolve</strong>, enabling AI agents to generate high-performance computer vision algorithms end-to-end with minimal human intervention.</p>
+                    <h3 data-lang="en">Evolutionary Code Generation</h3>
+                    <h3 data-lang="zh">进化式代码生成</h3>
+                    <p data-lang="en">Pioneering evolutionary code generation systems similar to <strong>DeepMind's AlphaEvolve</strong>, enabling AI agents to generate high-performance computer vision algorithms end-to-end with minimal human intervention.</p>
+                    <p data-lang="zh">开创类似<strong>DeepMind AlphaEvolve</strong>的进化式代码生成系统，使AI智能体能够以最少的人工干预端到端生成高性能计算机视觉算法。</p>
                 </div>
                 <div class="highlight-card">
                     <i class="fas fa-building"></i>
-                    <h3>Enterprise AI Transformation</h3>
-                    <p>Deep expertise in preparing enterprises for the agentic AI era. Leading multi-modal GenAI teams to develop work instruction assistants, market research tools, and RAG-based solutions using vector and graph databases.</p>
+                    <h3 data-lang="en">Enterprise AI Transformation</h3>
+                    <h3 data-lang="zh">企业AI转型</h3>
+                    <p data-lang="en">Deep expertise in preparing enterprises for the agentic AI era. Leading multi-modal GenAI teams to develop work instruction assistants, market research tools, and RAG-based solutions using vector and graph databases.</p>
+                    <p data-lang="zh">在帮助企业迎接智能体AI时代方面拥有深厚专业知识。领导多模态GenAI团队开发作业指导助手、市场研究工具，以及基于向量和图数据库的RAG解决方案。</p>
                 </div>
             </div>
         </div>
@@ -772,57 +869,71 @@
     <!-- Enhanced Experience Section -->
     <section class="experience" id="experience">
         <div class="container">
-            <h2 class="section-title">Professional Journey</h2>
-            <p class="section-subtitle">A decade of experience across leading technology companies and research institutions</p>
+            <h2 class="section-title" data-lang="en">Professional Journey</h2>
+            <h2 class="section-title" data-lang="zh">职业历程</h2>
+            <p class="section-subtitle" data-lang="en">A decade of experience across leading technology companies and research institutions</p>
+            <p class="section-subtitle" data-lang="zh">十年来在顶尖科技公司和研究机构的丰富经验</p>
             
             <div class="experience-cards">
                 <!-- Bosch -->
                 <div class="experience-card bosch">
                     <div class="experience-header">
                         <div class="experience-header-left">
-                            <h3>Data Scientist & AI Lead</h3>
+                            <h3 data-lang="en">Data Scientist & AI Lead</h3>
+                            <h3 data-lang="zh">数据科学家 & AI技术负责人</h3>
                             <div class="experience-company">
                                 <div class="company-logo bosch">B</div>
-                                <span class="company-name">Bosch</span>
+                                <span class="company-name" data-lang="en">Bosch</span>
+                                <span class="company-name" data-lang="zh">博世</span>
                             </div>
                             <div class="experience-meta">
-                                <span><i class="fas fa-calendar-alt"></i>Jun 2021 - Present</span>
-                                <span><i class="fas fa-map-marker-alt"></i>Shanghai, China</span>
+                                <span><i class="fas fa-calendar-alt"></i><span data-lang="en">Jun 2021 - Present</span><span data-lang="zh">2021年6月 - 至今</span></span>
+                                <span><i class="fas fa-map-marker-alt"></i><span data-lang="en">Shanghai, China</span><span data-lang="zh">中国上海</span></span>
                             </div>
                         </div>
                         <div class="experience-badge">
                             <i class="fas fa-star"></i>
-                            Featured at Global AI Day
+                            <span data-lang="en">Featured at Global AI Day</span>
+                            <span data-lang="zh">全球AI日重点展示</span>
                         </div>
                     </div>
                     <div class="experience-body">
-                        <p class="experience-description">
+                        <p class="experience-description" data-lang="en">
                             Leading the development of enterprise-grade agentic AI systems at one of the world's largest automotive and industrial technology companies. Spearheading multi-agent architectures that have been <strong>highlighted at the Global Bosch AI Day</strong>, demonstrating the transformative potential of AI in manufacturing and enterprise operations.
+                        </p>
+                        <p class="experience-description" data-lang="zh">
+                            在全球最大的汽车和工业技术公司之一领导企业级智能体AI系统的开发。主导的多智能体架构在<strong>博世全球AI日</strong>上重点展示，展现了AI在制造业和企业运营中的变革潜力。
                         </p>
                         <div class="experience-highlights">
                             <div class="highlight-item">
                                 <i class="fas fa-robot"></i>
-                                <span><strong>Multi-Agent Systems:</strong> Built production-ready agentic solutions for customer service automation, intelligent SQL generation, and automated CV code generation</span>
+                                <span data-lang="en"><strong>Multi-Agent Systems:</strong> Built production-ready agentic solutions for customer service automation, intelligent SQL generation, and automated CV code generation</span>
+                                <span data-lang="zh"><strong>多智能体系统：</strong>构建了面向客户服务自动化、智能SQL生成和自动化CV代码生成的生产级智能体解决方案</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-dna"></i>
-                                <span><strong>Evolutionary Code Gen:</strong> Developed systems similar to DeepMind's AlphaEvolve for end-to-end generation of high-performance computer vision algorithms</span>
+                                <span data-lang="en"><strong>Evolutionary Code Gen:</strong> Developed systems similar to DeepMind's AlphaEvolve for end-to-end generation of high-performance computer vision algorithms</span>
+                                <span data-lang="zh"><strong>进化式代码生成：</strong>开发了类似DeepMind AlphaEvolve的系统，实现高性能计算机视觉算法的端到端生成</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-brain"></i>
-                                <span><strong>GenAI Leadership:</strong> Lead multi-modal GenAI team, building work instruction assistants and market research tools using Vector/Graph RAG</span>
+                                <span data-lang="en"><strong>GenAI Leadership:</strong> Lead multi-modal GenAI team, building work instruction assistants and market research tools using Vector/Graph RAG</span>
+                                <span data-lang="zh"><strong>GenAI团队领导：</strong>领导多模态GenAI团队，使用向量/图RAG构建作业指导助手和市场研究工具</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-trophy"></i>
-                                <span><strong>Competition Champion:</strong> Won the Bosch Time Series Classification Competition, demonstrating expertise in predictive analytics</span>
+                                <span data-lang="en"><strong>Competition Champion:</strong> Won the Bosch Time Series Classification Competition, demonstrating expertise in predictive analytics</span>
+                                <span data-lang="zh"><strong>竞赛冠军：</strong>获得博世时间序列分类竞赛冠军，展现了在预测分析领域的专业能力</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-eye"></i>
-                                <span><strong>Computer Vision:</strong> Implemented anomaly detection with high recall & low false alarm rates; forklift battery tracking and localization</span>
+                                <span data-lang="en"><strong>Computer Vision:</strong> Implemented anomaly detection with high recall & low false alarm rates; forklift battery tracking and localization</span>
+                                <span data-lang="zh"><strong>计算机视觉：</strong>实现了高召回率、低误报率的异常检测；叉车电池跟踪与定位系统</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-chart-line"></i>
-                                <span><strong>Time Series & Optimization:</strong> Predictive maintenance, auto parameter tuning with causal analysis, Bayesian optimization</span>
+                                <span data-lang="en"><strong>Time Series & Optimization:</strong> Predictive maintenance, auto parameter tuning with causal analysis, Bayesian optimization</span>
+                                <span data-lang="zh"><strong>时序分析与优化：</strong>预测性维护、基于因果分析的自动参数调优、贝叶斯优化</span>
                             </div>
                         </div>
                         <div class="experience-tags">
@@ -841,37 +952,46 @@
                 <div class="experience-card tencent">
                     <div class="experience-header">
                         <div class="experience-header-left">
-                            <h3>Computer Vision Researcher</h3>
+                            <h3 data-lang="en">Computer Vision Researcher</h3>
+                            <h3 data-lang="zh">计算机视觉研究员</h3>
                             <div class="experience-company">
                                 <div class="company-logo tencent">T</div>
-                                <span class="company-name">Tencent</span>
+                                <span class="company-name" data-lang="en">Tencent</span>
+                                <span class="company-name" data-lang="zh">腾讯</span>
                             </div>
                             <div class="experience-meta">
-                                <span><i class="fas fa-calendar-alt"></i>Apr 2020 - May 2021</span>
-                                <span><i class="fas fa-map-marker-alt"></i>Shanghai, China</span>
+                                <span><i class="fas fa-calendar-alt"></i><span data-lang="en">Apr 2020 - May 2021</span><span data-lang="zh">2020年4月 - 2021年5月</span></span>
+                                <span><i class="fas fa-map-marker-alt"></i><span data-lang="en">Shanghai, China</span><span data-lang="zh">中国上海</span></span>
                             </div>
                         </div>
                     </div>
                     <div class="experience-body">
-                        <p class="experience-description">
+                        <p class="experience-description" data-lang="en">
                             Developed cutting-edge computer vision and generative AI solutions for Tencent's flagship social platforms, reaching hundreds of millions of users. Specialized in real-time avatar animation and advanced GAN-based image generation technologies.
+                        </p>
+                        <p class="experience-description" data-lang="zh">
+                            为腾讯旗舰社交平台开发前沿的计算机视觉和生成式AI解决方案，服务数亿用户。专注于实时虚拟形象动画和先进的GAN图像生成技术。
                         </p>
                         <div class="experience-highlights">
                             <div class="highlight-item">
                                 <i class="fas fa-user-circle"></i>
-                                <span><strong>Avatar Animation:</strong> Developed real-time avatar animation algorithms deployed on QQ and WeShi platforms, serving millions of daily active users</span>
+                                <span data-lang="en"><strong>Avatar Animation:</strong> Developed real-time avatar animation algorithms deployed on QQ and WeShi platforms, serving millions of daily active users</span>
+                                <span data-lang="zh"><strong>虚拟形象动画：</strong>开发部署在QQ和微视平台的实时虚拟形象动画算法，服务数百万日活用户</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-paint-brush"></i>
-                                <span><strong>Face Cartoonization:</strong> Built end-to-end pixel2pixel GAN pipelines for human face cartoonization with production-quality results</span>
+                                <span data-lang="en"><strong>Face Cartoonization:</strong> Built end-to-end pixel2pixel GAN pipelines for human face cartoonization with production-quality results</span>
+                                <span data-lang="zh"><strong>人脸卡通化：</strong>构建端到端pixel2pixel GAN流水线，实现生产级质量的人脸卡通化效果</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-camera"></i>
-                                <span><strong>Data Pipeline:</strong> Designed data acquisition systems using Azure Kinect, including cleaning, CNN model design and training workflows</span>
+                                <span data-lang="en"><strong>Data Pipeline:</strong> Designed data acquisition systems using Azure Kinect, including cleaning, CNN model design and training workflows</span>
+                                <span data-lang="zh"><strong>数据流水线：</strong>使用Azure Kinect设计数据采集系统，包括数据清洗、CNN模型设计和训练工作流</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-magic"></i>
-                                <span><strong>Photo Restoration:</strong> Contributed to deep fake detection and "bring back old photos" GAN-based restoration projects</span>
+                                <span data-lang="en"><strong>Photo Restoration:</strong> Contributed to deep fake detection and "bring back old photos" GAN-based restoration projects</span>
+                                <span data-lang="zh"><strong>照片修复：</strong>参与深度伪造检测和基于GAN的"老照片修复"项目</span>
                             </div>
                         </div>
                         <div class="experience-tags">
@@ -888,37 +1008,46 @@
                 <div class="experience-card dfki">
                     <div class="experience-header">
                         <div class="experience-header-left">
-                            <h3>Computer Vision Researcher</h3>
+                            <h3 data-lang="en">Computer Vision Researcher</h3>
+                            <h3 data-lang="zh">计算机视觉研究员</h3>
                             <div class="experience-company">
                                 <div class="company-logo dfki">D</div>
-                                <span class="company-name">DFKI (German Research Center for AI)</span>
+                                <span class="company-name" data-lang="en">DFKI (German Research Center for AI)</span>
+                                <span class="company-name" data-lang="zh">DFKI（德国人工智能研究中心）</span>
                             </div>
                             <div class="experience-meta">
-                                <span><i class="fas fa-calendar-alt"></i>Sep 2018 - Sep 2019</span>
-                                <span><i class="fas fa-map-marker-alt"></i>Kaiserslautern, Germany</span>
+                                <span><i class="fas fa-calendar-alt"></i><span data-lang="en">Sep 2018 - Sep 2019</span><span data-lang="zh">2018年9月 - 2019年9月</span></span>
+                                <span><i class="fas fa-map-marker-alt"></i><span data-lang="en">Kaiserslautern, Germany</span><span data-lang="zh">德国凯泽斯劳滕</span></span>
                             </div>
                         </div>
                     </div>
                     <div class="experience-body">
-                        <p class="experience-description">
+                        <p class="experience-description" data-lang="en">
                             Conducted advanced research at Europe's largest AI research center, focusing on 3D human pose estimation and neural rendering. Published peer-reviewed research at top-tier venues in augmented reality and computer vision.
+                        </p>
+                        <p class="experience-description" data-lang="zh">
+                            在欧洲最大的AI研究中心进行前沿研究，专注于3D人体姿态估计和神经渲染。在增强现实和计算机视觉顶级会议上发表同行评审论文。
                         </p>
                         <div class="experience-highlights">
                             <div class="highlight-item">
                                 <i class="fas fa-running"></i>
-                                <span><strong>3D Pose Estimation:</strong> Research on 3D human pose and shape estimation using DNN with parametric human models (SMPL)</span>
+                                <span data-lang="en"><strong>3D Pose Estimation:</strong> Research on 3D human pose and shape estimation using DNN with parametric human models (SMPL)</span>
+                                <span data-lang="zh"><strong>3D姿态估计：</strong>使用DNN结合参数化人体模型（SMPL）进行3D人体姿态和形状估计研究</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-lightbulb"></i>
-                                <span><strong>Novel Research:</strong> Proposed innovative human part silhouette loss with differential neural rendering techniques</span>
+                                <span data-lang="en"><strong>Novel Research:</strong> Proposed innovative human part silhouette loss with differential neural rendering techniques</span>
+                                <span data-lang="zh"><strong>创新研究：</strong>提出创新的人体部位轮廓损失函数，结合可微分神经渲染技术</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-file-alt"></i>
-                                <span><strong>Publication:</strong> Published "Learning 6DoF Object Poses from Synthetic Single Channel Images" at ISMAR 2018</span>
+                                <span data-lang="en"><strong>Publication:</strong> Published "Learning 6DoF Object Poses from Synthetic Single Channel Images" at ISMAR 2018</span>
+                                <span data-lang="zh"><strong>学术发表：</strong>在ISMAR 2018发表论文"Learning 6DoF Object Poses from Synthetic Single Channel Images"</span>
                             </div>
                             <div class="highlight-item">
                                 <i class="fas fa-graduation-cap"></i>
-                                <span><strong>Master Thesis:</strong> Extended PWCNet with CNN patch descriptor, achieving state-of-art results on optical flow benchmarks</span>
+                                <span data-lang="en"><strong>Master Thesis:</strong> Extended PWCNet with CNN patch descriptor, achieving state-of-art results on optical flow benchmarks</span>
+                                <span data-lang="zh"><strong>硕士论文：</strong>扩展PWCNet结合CNN补丁描述符，在光流基准测试中达到最先进水平</span>
                             </div>
                         </div>
                         <div class="experience-tags">
@@ -937,11 +1066,13 @@
     <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <p class="section-subtitle">A comprehensive toolkit for building intelligent systems</p>
+            <h2 class="section-title" data-lang="en">Technical Skills</h2>
+            <h2 class="section-title" data-lang="zh">技术技能</h2>
+            <p class="section-subtitle" data-lang="en">A comprehensive toolkit for building intelligent systems</p>
+            <p class="section-subtitle" data-lang="zh">构建智能系统的全面技术栈</p>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> AI & ML</h3>
+                    <h3><i class="fas fa-brain"></i> <span data-lang="en">AI & ML</span><span data-lang="zh">AI与机器学习</span></h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Multi-Agent Systems</span>
                         <span class="skill-tag">RAG</span>
@@ -952,7 +1083,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <h3><i class="fas fa-code"></i> <span data-lang="en">Programming</span><span data-lang="zh">编程语言</span></h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">PyTorch</span>
@@ -962,7 +1093,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-eye"></i> Computer Vision</h3>
+                    <h3><i class="fas fa-eye"></i> <span data-lang="en">Computer Vision</span><span data-lang="zh">计算机视觉</span></h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Object Detection</span>
                         <span class="skill-tag">Pose Estimation</span>
@@ -971,7 +1102,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-chart-line"></i> Analytics</h3>
+                    <h3><i class="fas fa-chart-line"></i> <span data-lang="en">Analytics</span><span data-lang="zh">数据分析</span></h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Time Series</span>
                         <span class="skill-tag">Bayesian Optimization</span>
@@ -986,20 +1117,29 @@
     <!-- Education Section -->
     <section class="education" id="education">
         <div class="container">
-            <h2 class="section-title">Education</h2>
-            <p class="section-subtitle">International academic background spanning Europe and Asia</p>
+            <h2 class="section-title" data-lang="en">Education</h2>
+            <h2 class="section-title" data-lang="zh">教育背景</h2>
+            <p class="section-subtitle" data-lang="en">International academic background spanning Europe and Asia</p>
+            <p class="section-subtitle" data-lang="zh">横跨欧亚的国际化学术背景</p>
             <div class="education-grid">
                 <div class="education-card">
-                    <h3>European Erasmus Master</h3>
-                    <div class="school">Embedded Computing Systems</div>
-                    <p>University of Kaiserslautern, Germany</p>
-                    <p>Norwegian University of Science and Technology, Norway</p>
+                    <h3 data-lang="en">European Erasmus Master</h3>
+                    <h3 data-lang="zh">欧盟Erasmus硕士</h3>
+                    <div class="school" data-lang="en">Embedded Computing Systems</div>
+                    <div class="school" data-lang="zh">嵌入式计算系统</div>
+                    <p class="location" data-lang="en">University of Kaiserslautern, Germany</p>
+                    <p class="location" data-lang="zh">德国凯泽斯劳滕工业大学</p>
+                    <p class="location" data-lang="en">Norwegian University of Science and Technology, Norway</p>
+                    <p class="location" data-lang="zh">挪威科技大学</p>
                     <div class="date">2015 - 2018</div>
                 </div>
                 <div class="education-card">
-                    <h3>Bachelor of Physics</h3>
-                    <div class="school">Nanjing University</div>
-                    <p>China</p>
+                    <h3 data-lang="en">Bachelor of Physics</h3>
+                    <h3 data-lang="zh">物理学学士</h3>
+                    <div class="school" data-lang="en">Nanjing University</div>
+                    <div class="school" data-lang="zh">南京大学</div>
+                    <p class="location" data-lang="en">China</p>
+                    <p class="location" data-lang="zh">中国</p>
                     <div class="date">2011 - 2015</div>
                 </div>
             </div>
@@ -1009,8 +1149,10 @@
     <!-- Publications Section -->
     <section class="publications" id="publications">
         <div class="container">
-            <h2 class="section-title">Publication</h2>
-            <p class="section-subtitle">Contributing to the advancement of AI research</p>
+            <h2 class="section-title" data-lang="en">Publication</h2>
+            <h2 class="section-title" data-lang="zh">学术发表</h2>
+            <p class="section-subtitle" data-lang="en">Contributing to the advancement of AI research</p>
+            <p class="section-subtitle" data-lang="zh">为AI研究的进步做出贡献</p>
             <div class="publication-card">
                 <h3>Learning 6DoF Object Poses from Synthetic Single Channel Images</h3>
                 <div class="venue">ISMAR 2018 - IEEE International Symposium on Mixed and Augmented Reality</div>
@@ -1021,8 +1163,10 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="section-subtitle">Interested in discussing AI strategy, multi-agent systems, or enterprise AI transformation? I'd love to hear from you.</p>
+            <h2 class="section-title" data-lang="en">Let's Connect</h2>
+            <h2 class="section-title" data-lang="zh">联系我</h2>
+            <p class="section-subtitle" data-lang="en">Interested in discussing AI strategy, multi-agent systems, or enterprise AI transformation? I'd love to hear from you.</p>
+            <p class="section-subtitle" data-lang="zh">如果您对AI战略、多智能体系统或企业AI转型感兴趣，欢迎与我交流。</p>
             <div class="contact-links">
                 <a href="mailto:matthew_d1993@hotmail.com" class="contact-link">
                     <i class="fas fa-envelope"></i>
@@ -1038,10 +1182,43 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Chengbiao Deng. All rights reserved.</p>
+        <p data-lang="en">&copy; 2024 Chengbiao Deng. All rights reserved.</p>
+        <p data-lang="zh">&copy; 2024 邓成标 版权所有</p>
     </footer>
 
     <script>
+        function setLanguage(lang) {
+            const body = document.body;
+            const buttons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'zh') {
+                body.classList.add('zh');
+                document.documentElement.lang = 'zh';
+            } else {
+                body.classList.remove('zh');
+                document.documentElement.lang = 'en';
+            }
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'zh' && btn.textContent === '中文') || 
+                    (lang === 'en' && btn.textContent === 'EN')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                setLanguage(savedLang);
+            }
+        });
+
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
         }
