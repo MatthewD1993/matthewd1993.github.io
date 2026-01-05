@@ -93,7 +93,8 @@
         }
 
         body.zh span[data-lang="zh"],
-        body.zh a[data-lang="zh"] {
+        body.zh a[data-lang="zh"],
+        body.zh strong[data-lang="zh"] {
             display: inline;
         }
 
@@ -804,7 +805,7 @@
                 </ul>
                 <div class="lang-toggle">
                     <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                    <button class="lang-btn" onclick="setLanguage('zh')">中文</button>
+                    <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
                 </div>
             </div>
         </div>
@@ -898,12 +899,11 @@
                         </div>
                     </div>
                     <div class="experience-body">
-                        <p class="experience-description" data-lang="en">
-                            Leading the development of enterprise-grade agentic AI systems at one of the world's largest automotive and industrial technology companies. Spearheading multi-agent architectures that have been <strong>highlighted at the Global Bosch AI Day</strong>, demonstrating the transformative potential of AI in manufacturing and enterprise operations.
+                        <p class="experience-description">
+                            <span data-lang="en">Leading the development of enterprise-grade agentic AI systems at one of the world's largest automotive and industrial technology companies. Spearheading multi-agent architectures that have been <strong>highlighted at the Global Bosch AI Day</strong>, demonstrating the transformative potential of AI in manufacturing and enterprise operations.</span>
+                            <span data-lang="zh">在全球最大的汽车和工业技术公司之一领导企业级智能体AI系统的开发。主导的多智能体架构在<strong>博世全球AI日</strong>上重点展示，展现了AI在制造业和企业运营中的变革潜力。</span>
                         </p>
-                        <p class="experience-description" data-lang="zh">
-                            在全球最大的汽车和工业技术公司之一领导企业级智能体AI系统的开发。主导的多智能体架构在<strong>博世全球AI日</strong>上重点展示，展现了AI在制造业和企业运营中的变革潜力。
-                        </p>
+                        <!-- Removed redundant zh description -->
                         <div class="experience-highlights">
                             <div class="highlight-item">
                                 <i class="fas fa-robot"></i>
@@ -1201,7 +1201,7 @@
             
             buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if ((lang === 'zh' && btn.textContent === '中文') || 
+                if ((lang === 'zh' && btn.textContent === 'ZH') || 
                     (lang === 'en' && btn.textContent === 'EN')) {
                     btn.classList.add('active');
                 }
