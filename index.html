@@ -81,21 +81,25 @@
 
         /* Hide elements based on language */
         [data-lang="zh"] {
-            display: none;
+            display: none !important;
         }
 
         body.zh [data-lang="en"] {
-            display: none;
+            display: none !important;
         }
 
         body.zh [data-lang="zh"] {
-            display: block;
+            display: block !important;
         }
 
         body.zh span[data-lang="zh"],
         body.zh a[data-lang="zh"],
         body.zh strong[data-lang="zh"] {
-            display: inline;
+            display: inline !important;
+        }
+        
+        body.zh a.btn[data-lang="zh"] {
+            display: inline-block !important;
         }
 
         /* Navigation */
